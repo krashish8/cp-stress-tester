@@ -1,0 +1,7 @@
+# Ignore everything in this directory
+*
+
+# Except this file
+!.gitignore
+
+# This directory will contain all the Object files produced during compilation of the C++ codes.
