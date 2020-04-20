@@ -8,23 +8,25 @@ using namespace std;
 #define fi first
 #define se second
 #define rep(i,a,b) for (int i = a; i < b; ++i)
-#define dbg(x) { cerr<<"> "<<#x<<": "<<x<< endl; }
-#define dbg2(x,y) { cerr<<"> "<<#x<<": "<<x<<" , "<<#y<<": "<<y<<endl; }
-#define dbg3(x,y,z) { cerr<<"> "<<#x<<": "<<x<<" , "<<#y<<": "<<y<<" , "<<#z<<": "<<z<<endl; }
-#define IOS ios::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define IOS ios::sync_with_stdio(false); cin.tie(NULL);
 #ifndef LOCAL
+#define dbg(...) ;
 #define endl '\n'
 #endif
 
-const int inf = INT_MAX;
+const int inf = 1e15;
 const int MOD = 1e9 + 7;
 const int N = 2e5 + 5;
 
-
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+int rand(int l, int r){
+    uniform_int_distribution<int> uid(l, r);
+    return uid(rng);
+}
 
 signed main(){
     IOS;
-    
-    // return 1, in case of Wrong Verdict
+    int a = rand(1, 1000), b = rand(1, 1000);
+    cout << a << " " << b << endl;
     return 0;
 }
