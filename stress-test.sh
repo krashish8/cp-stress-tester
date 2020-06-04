@@ -5,7 +5,7 @@
 
 # Usage:
 #
-#   ./stress-test <file.cpp> ...[optional_parameters]...
+#   ./stress-test.sh <file.cpp> ...[optional_parameters]...
 #   All the cpp files should be present in the same directory
 #
 #   Optional Parameters:
@@ -78,7 +78,7 @@
 
 show_help() {
     echo "
-Usage: ./stress-test <file.cpp> ...[optional_parameters]...
+Usage: ./stress-test.sh <file.cpp> ...[optional_parameters]...
        All the cpp files should be present in the same directory
 
 Optional Parameters:
