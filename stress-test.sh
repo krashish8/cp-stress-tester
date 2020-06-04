@@ -130,22 +130,26 @@ compile() {
 }
 
 run() {
-    if [[ $1 == "Generator" ]] || [[ $1 == "Checker" ]]; then
+    if [[ $1 == "Generator" ]]; then
+        # if ! timeout $TIMEOUT $GENERATOR_EXEC > $TESTCASE_FILE
         if ! timeout $2 $3 > $4; then
             VERDICT="\n$1 execution failed due to timeout or runtime errors.\n\nTest Case: \n$(cat $4)"
-            echo -e "${VERDICT}" | tee $5
+            echo -e "${VERDICT}" | tee $5 # echo -e "${VERDICT}" | tee $VERDICT_FILE
             exit 1
         fi
     elif [[ $1 == "Checker" ]]; then
+        # if ! $CHECKER_EXEC < $COMBINED_FILE > $VERDICT_FILE
         if ! $3 < $4 > $5; then
+            # VERDICT="\n\nTest Case: \n$(cat $TESTCASE_FILE) \n\nOutput: \n$(cat $MAIN_FILE_OUTPUT) \n\nWrong Answer \n\n"
             VERDICT="\n\nTest Case: \n$(cat $6) \n\nOutput: \n$(cat $7) \n\nWrong Answer \n\n"
             echo -e "${VERDICT}" | tee $5
             exit 1
         fi
     else
+        # if ! timeout $TIMEOUT $GOOD_FILE_EXEC < $TESTCASE_FILE > $GOOD_FILE_OUTPUT
         if ! timeout $2 $3 < $4 > $5; then
-            VERDICT="\n$1 execution failed due to timeout or runtime errors.\n\nTest Case: \n$(cat $5)"
-            echo -e "${VERDICT}" | tee $6
+            VERDICT="\n$1 execution failed due to timeout or runtime errors.\n\nTest Case: \n$(cat $4)"
+            echo -e "${VERDICT}" | tee $6 # echo -e "${VERDICT}" | tee $VERDICT_FILE
             exit 1
         fi
     fi
