@@ -63,6 +63,8 @@ This tester is divided into three types, for testing three different category of
 
 ## Description
 
+**NOTE**: For a easier description of the files, refer to the [last section](#files) of this readme.
+
 For all the below examples, suppose the main solution to test has the filename: `main.cpp`.  
 For all the files mentioned below, note that __ means **two** underscores.  
 The extra files required for testing are named as `'main file' + '__' + '[type].cpp'`, as described below.
@@ -92,7 +94,7 @@ The directory containing the file `main.cpp` should have the following files:
   - First, it should take two types of input from the standard input stream (`stdin`) using `cin` in the following order:
     1. The first input is the testcase produced by the generator: `main__Generator.cpp`.
     2. The second input is the answer produced by the main solution file: `main.cpp`.
-  - It should give verdict to the standard error stream (`stderr`) using `cerr`. First, it should output an `endl` (for better readability), and then give the verdict such as `Expected ... found ...` to `cerr`.
+  - It should give verdict to the standard error stream (`stderr`) using `cerr`. First, it should output an `endl` (for better readability), and then give the verdict such as `Expected [...] found [...]` to `cerr`.
   - Finally, it should `return 0` in case of SUCCESS, or `return 1` in case of FAILURE.
   - Note: Every response to the user is given using `cerr`.
 * `main__Generator.cpp`:
@@ -120,3 +122,135 @@ The directory containing the file `main.cpp` should have the following files:
   - In case of any error, it should output it using `cerr` and simultaneously `return 1`.
   - In case the answer is correct, it gives appropriate verdict using `cerr` and returns 0.
   - Also, for debugging purposes, print the correct output using `cerr` at the end of this file, before returning 0 or 1.
+
+## Files
+
+### main.cpp
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    int answer;
+    // Write the main solution here
+    cout << answer << endl;
+}
+```
+
+### main__Good.cpp
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    int answer;
+    // Write the brute-force correct solution here
+    cout << answer << endl;
+}
+```
+
+### main__Generator.cpp
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+int rand(int l, int r){
+    uniform_int_distribution<int> uid(l, r);
+    return uid(rng);
+}
+
+int main() {
+    // Generate random test case
+    int testcase = rand(1,100);
+    
+    // Output the random test case
+    cout << testcase << endl;
+}
+```
+
+### main__Checker.cpp
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    // Take the testcase as input
+    int testcase;
+    cin >> testcase;
+    
+    // Take the answer produced by main solution as input
+    int answer;
+    cin >> answer;
+    
+    // Check whether the answer produced satisfies the test case
+    int expected_answer;
+    bool is_correct = false;
+    // ...
+    if (is_correct) {
+        // Output the verdict to stderr
+        cerr << endl;
+        cerr << "Expected " << expected_answer << ", found " << answer << endl;
+        return 1;     // return 1 in case of FAILURE
+    }
+    return 0;     // return 0 in case of SUCCESS
+}
+```
+
+### main__Interactor.cpp
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+int rand(int l, int r){
+    uniform_int_distribution<int> uid(l, r);
+    return uid(rng);
+}
+
+int main() {
+    // Generate random test case
+    int answer = rand(1,100);
+    
+    int asked_questions = 0;
+    while (true) {
+        char user_response_type;
+        int response;
+        
+        // Take the user's response as input
+        cin >> user_response_type >> response;
+        // Outputting this to stderr for debugging purposes
+        cerr << user_response_type << " " << response << endl;
+        
+        asked_questions++;
+        if (asked_questions > 100) {
+            cerr << "Too many questions" << endl;     // Outputting every verdict to stderr
+            return 1;     // return 1 in case of FAILURE
+        }
+        
+        if (user_response_type == '?') {
+            // Give proper response to stdout
+            // FOR INTERACTING WITH USER, GIVE THE RESPONSE USING `cout`, FOR GIVING VERDICT, USE `cerr`
+            int interactor_response;
+            // ...
+            cout << interactor_response << endl;
+            cerr << interactor_response << endl;     // Outputting this to stderr for debugging purposes
+        } else if (user_response_type == '!') {
+            if (response == answer) {
+                cerr << "Correct solution" << endl;
+                break;
+            } else {
+                cerr << "Incorrect solution." << endl;
+                return 1;     // return 1 in case of FAILURE
+            }
+        }
+    }
+    // Output the correct answer and return 0 (SUCCESS)
+    cerr << "Correct Answer: " << answer << endl;
+    return 0;
+}
+```
