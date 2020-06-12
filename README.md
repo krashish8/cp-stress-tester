@@ -173,6 +173,25 @@ int main() {
 }
 ```
 
+**Getting the current testcase in the Generator:** (to generate fixed test cases, if required)
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+// Add the argc and argv in the main function to accept the arguments
+int main(int argc, char **argv){
+    // The testcase is passed as the first argument to the generator (argv[1])
+    // Testcases starts from 0 upto (TOTAL_TESTCASE - 1)
+    
+    // Convert the argument to an integer
+    int test = atoi(argv[1]);
+    
+    // Generate a fixed testcase according to the testcase number
+    cout << test << " " << test * 2 << endl;
+}
+```
+
 ### main__Checker.cpp
 ```cpp
 #include <bits/stdc++.h>
