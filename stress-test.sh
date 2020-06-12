@@ -131,10 +131,10 @@ compile() {
 
 run() {
     if [[ $1 == "Generator" ]]; then
-        # if ! timeout $TIMEOUT $GENERATOR_EXEC > $TESTCASE_FILE
-        if ! timeout $2 $3 > $4; then
-            VERDICT="\n$1 execution failed due to timeout or runtime errors.\n\nTest Case: \n$(cat $4)"
-            echo -e "${VERDICT}" | tee $5 # echo -e "${VERDICT}" | tee $VERDICT_FILE
+        # if ! timeout $TIMEOUT $GENERATOR_EXEC $TESTCASE > $TESTCASE_FILE
+        if ! timeout $2 $3 $4 > $5; then
+            VERDICT="\n$1 execution failed due to timeout or runtime errors.\n\nTest Case: \n$(cat $5)"
+            echo -e "${VERDICT}" | tee $6 # echo -e "${VERDICT}" | tee $VERDICT_FILE
             exit 1
         fi
     elif [[ $1 == "Checker" ]]; then
@@ -256,7 +256,7 @@ else
 
             echo -e "Running Test Case #$i"
 
-            run "Generator" $TIMEOUT $GENERATOR_EXEC $TESTCASE_FILE $VERDICT_FILE
+            run "Generator" $TIMEOUT $GENERATOR_EXEC $i $TESTCASE_FILE $VERDICT_FILE
             run "Good Solution" $TIMEOUT $GOOD_FILE_EXEC $TESTCASE_FILE $GOOD_FILE_OUTPUT $VERDICT_FILE
             run "Main Solution" $TIMEOUT $MAIN_FILE_EXEC $TESTCASE_FILE $MAIN_FILE_OUTPUT $VERDICT_FILE
             
@@ -282,7 +282,7 @@ else
 
             echo -e "Running Test Case #$i"
 
-            run "Generator" $TIMEOUT $GENERATOR_EXEC $TESTCASE_FILE $VERDICT_FILE
+            run "Generator" $TIMEOUT $GENERATOR_EXEC $i $TESTCASE_FILE $VERDICT_FILE
             run "Main Solution" $TIMEOUT $MAIN_FILE_EXEC $TESTCASE_FILE $MAIN_FILE_OUTPUT $VERDICT_FILE
 
             echo >> $TESTCASE_FILE

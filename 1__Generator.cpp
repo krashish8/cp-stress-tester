@@ -2,7 +2,7 @@
 #pragma GCC optimize "03"
 using namespace std;
 
-#define int long long int
+#define double long double
 #define pb push_back
 #define pii pair<int,int>
 #define fi first
@@ -14,19 +14,14 @@ using namespace std;
 #define endl '\n'
 #endif
 
-const int inf = 1e15;
 const int MOD = 1e9 + 7;
 const int N = 2e5 + 5;
 
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-int rand(int l, int r){
-    uniform_int_distribution<int> uid(l, r);
-    return uid(rng);
-}
 
-signed main(){
+
+int main(int argc, char **argv){
     IOS;
-    int a = rand(1, 1000), b = rand(1, 1000);
-    cout << a << " " << b << endl;
+    int test = atoi(argv[1]);
+    cout << test << " " << test * 2 << endl;
     return 0;
 }
