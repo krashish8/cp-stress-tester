@@ -173,7 +173,7 @@ int main() {
 }
 ```
 
-**Getting the current testcase in the Generator:** (to generate fixed test cases, if required)
+Getting the current testcase in the Generator (to generate fixed test cases, if required):
 
 ```cpp
 #include <bits/stdc++.h>
