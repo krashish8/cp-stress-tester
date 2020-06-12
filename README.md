@@ -166,7 +166,7 @@ int rand(int l, int r){
 
 int main() {
     // Generate random test case
-    int testcase = rand(1,100);
+    int testcase = rand(1, 100);
     
     // Output the random test case
     cout << testcase << endl;
