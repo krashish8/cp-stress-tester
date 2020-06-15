@@ -60,6 +60,12 @@ This tester is divided into three types, for testing three different category of
        <timeout>           Timeout of each execution (given in seconds)
                            [DEFAULT]: 2 (2 seconds)
    ```
+Examples:
+* `./stress-test.sh main.cpp`
+* `./stress-test.sh main.cpp custom 50`
+* `./stress-test.sh main.cpp interactive 100 1`
+ 
+Make sure that the file `stress.sh` is executable. If it isn't, then run `sudo chmod +x stress-test.sh` to make it executable.
 
 ## Description
 
@@ -122,6 +128,8 @@ The directory containing the file `main.cpp` should have the following files:
   - In case of any error, it should output it using `cerr` and simultaneously `return 1`.
   - In case the answer is correct, it gives appropriate verdict using `cerr` and returns 0.
   - Also, for debugging purposes, print the correct output using `cerr` at the end of this file, before returning 0 or 1.
+
+In case of interactor, to flush the output, make sure to use `endl` at the end, and not `\n`.
 
 ## Files
 
@@ -230,6 +238,8 @@ int rand(int l, int r){
     uniform_int_distribution<int> uid(l, r);
     return uid(rng);
 }
+
+// ALWAYS USE `endl` FOR FLUSHING THE OUTPUT, NOT `\n`
 
 int main() {
     // Generate random test case
