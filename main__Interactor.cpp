@@ -7,6 +7,8 @@ int rand(int l, int r){
     return uid(rng);
 }
 
+// ALWAYS USE `endl` FOR FLUSHING THE OUTPUT, NOT `\n`
+
 int main() {
     // Generate random test case
     int answer = rand(1,100);
