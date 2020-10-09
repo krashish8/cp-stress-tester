@@ -154,7 +154,7 @@ The following files are required:
 <summary><code>main__Generator.cpp</code></summary>
 
   - This file acts as a generator as well as an interactor (to generate random test case and to interact with the main solution).
-  - Use `cin` and `cout` for interaction (`cin` - take user's query, `cout` - give back response). For printing anything to console or for giving verdict, use `cerr`.
+  - Use `cin` and `cout` for interaction (`cin` - take user's query, `cout` - give back response). For printing anything to the console, or for giving verdict, use `cerr`.
   - First, generate a random test case - e.g. the number to guess, and store it in some container.
   - Then loop until the number of queries exceed the allowed query, or the user guesses the correct answer.
   - Now, inside the loop, first take the output produced by the main solution from the standard input stream using `cin`.
