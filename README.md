@@ -2,19 +2,19 @@
 
 ## Intro
 
-This project contains the files that can be used for Stress Testing the solutions (particularly C++). It can be used to find a (smaller) test case in which the main solution fails.
+This project contains the files that can be used for Stress Testing the C++ solution, i.e., to find a test case in which the main solution fails.
 
 This tester is divided into three types, for testing three different category of problems:
-* Normal tester: Used to compare the main solution with a correct brute-force solution.
-* Custom tester: Used when the solution may have more than one correct solution.
-* Interactive tester: Used for testing the interactive problems.
+* Normal tester: To compare the main solution with a correct brute-force solution.
+* Custom tester: To validate a solution with more than one correct solution.
+* Interactive tester: To test the interactive problems.
 
 **Note**:
-* For better usage, the file `stress-test.sh` can be added to PATH, or can be moved to `/usr/bin/` directory, by executing the command from the root of this directory:
+* To directly execute the script from the terminal, add the file `stress-test.sh` to the PATH variable, or move it to `/usr/bin/` directory, by executing the following command from the root of this directory:
   ```bash
   sudo cp stress-test.sh /usr/bin/
   ```
-* Also, to directly execute it from the Sublime Text (or any IDE), the command to run this file can be added to Sublime Build file, as a variant.
+* To directly run the stress-tester from an IDE (e.g. Sublime Text), add the command to execute this script to the build file of the IDE. For Sublime Text, the following lines can be added to the build file:
   ```json
   {
       "variants":
@@ -69,33 +69,56 @@ Make sure that the file `stress.sh` is executable. If it isn't, then run `sudo c
 
 ## Description
 
-**NOTE**: For a easier description of the files, refer to the [last section](#files) of this readme.
+**NB:** The description is messed up, feel free to contribute and improve it :)
 
-For all the below examples, suppose the main solution to test has the filename: `main.cpp`.  
-For all the files mentioned below, note that __ means **two** underscores.  
-The extra files required for testing are named as `'main file' + '__' + '[type].cpp'`, as described below.
+For all the below examples, the main solution has the filename: `main.cpp`.
+The extra files required for testing are named as `'main file' + '__' + '[type].cpp'`, as described below. Note that __ denotes **two** underscores.  
 
 **Usage:** `./stress-test.sh main.cpp ...[optional parameters]...`
 
+
+
 ### Normal testing
 
-The directory containing the file `main.cpp` should have the following files:
+The following files are required:
 
-* `main.cpp`:
+<details>
+<summary><code>main.cpp</code></summary>
+
   - The main solution file to test.
-* `main__Good.cpp`:
+
+</details>
+
+<details>
+<summary><code>main__Good.cpp</code></summary>
+
   - The correct, brute force solution.
-* `main__Generator.cpp`:
+
+</details>
+
+<details>
+<summary><code>main__Generator.cpp</code></summary>
+
   - The file to generate random test cases.
   - It should output the test case to the standard output stream (`stdout`) using `cout`.
 
+</details>
+
+
 ### Custom testing
 
-The directory containing the file `main.cpp` should have the following files:
+The following files are required:
 
-* `main.cpp`:
+<details>
+<summary><code>main.cpp</code></summary>
+
   - The main solution file to test.
-* `main__Checker.cpp`:
+
+</details>
+
+<details>
+<summary><code>main__Checker.cpp</code></summary>
+
   - The file to test the solution, which has more than one correct solution.
   - First, it should take two types of input from the standard input stream (`stdin`) using `cin` in the following order:
     1. The first input is the testcase produced by the generator: `main__Generator.cpp`.
@@ -103,17 +126,32 @@ The directory containing the file `main.cpp` should have the following files:
   - It should give verdict to the standard error stream (`stderr`) using `cerr`. First, it should output an `endl` (for better readability), and then give the verdict such as `Expected [...] found [...]` to `cerr`.
   - Finally, it should `return 0` in case of SUCCESS, or `return 1` in case of FAILURE.
   - Note: Every response to the user is given using `cerr`.
-* `main__Generator.cpp`:
+
+</details>
+
+<details>
+<summary><code>main__Generator.cpp</code></summary>
+
   - The file to generate random test cases.
-  - It should output the test case to the standard output stream (`cout`).
+  - It should output the test case to the standard output stream (`stdout`) using `cout`.
+
+</details>
+
 
 ### Interactive testing
 
-The directory containing the file `main.cpp` should have the following files:
+The following files are required:
 
-* `main.cpp`:
+<details>
+<summary><code>main.cpp</code></summary>
+
   - The main solution file to test.
-* `main__Interactor.cpp`:
+
+</details>
+
+<details>
+<summary><code>main__Generator.cpp</code></summary>
+
   - This file acts as a generator and an interactor (to generate random test case and to interact with the main solution).
   - It should first generate a random test case - e.g. the number to guess.
   - Then rest of the code is written inside an infinite while loop
@@ -129,11 +167,16 @@ The directory containing the file `main.cpp` should have the following files:
   - In case the answer is correct, it gives appropriate verdict using `cerr` and returns 0.
   - Also, for debugging purposes, print the correct output using `cerr` at the end of this file, before returning 0 or 1.
 
-In case of interactor, to flush the output, make sure to use `endl` at the end, and not `\n`.
+</details>
+
+For an interactor, make sure to flush the output by using `endl`, and not `\n`.
+
 
 ## Files
 
-### main.cpp
+<details>
+<summary><code>main.cpp</code></summary>
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -147,7 +190,11 @@ int main() {
 }
 ```
 
-### main__Good.cpp
+</details>
+
+<details>
+<summary><code>main__Good.cpp</code></summary>
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -161,7 +208,11 @@ int main() {
 }
 ```
 
-### main__Generator.cpp
+</details>
+
+<details>
+<summary><code>main__Generator.cpp</code></summary>
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -200,7 +251,11 @@ int main(int argc, char **argv){
 }
 ```
 
-### main__Checker.cpp
+</details>
+
+<details>
+<summary><code>main__Checker.cpp</code></summary>
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -228,7 +283,11 @@ int main() {
 }
 ```
 
-### main__Interactor.cpp
+</details>
+
+<details>
+<summary><code>main__Interactor.cpp</code></summary>
+
 ```cpp
 #include <bits/stdc++.h>
 using namespace std;
@@ -283,3 +342,7 @@ int main() {
     return 0;
 }
 ```
+
+</details>
+
+
