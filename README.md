@@ -1,4 +1,4 @@
-# Stress Tester
+# Stress Tester [Linux]
 
 ## Intro
 
@@ -16,7 +16,8 @@ This tester is divided into three types, for testing three different category of
   ```bash
   sudo cp stress-test.sh /usr/bin/
   ```
-* To directly run the stress-tester from an IDE (e.g. Sublime Text), add the command to execute this script to the build file of the IDE. For Sublime Text, the following lines shall be added to the build file:
+* To directly run the stress-tester from an IDE (e.g. Sublime Text), modify the build file of the IDE by adding the commands to execute this script. For Sublime Text, the following lines shall be added to the build file: ([Example of C++ Build File](https://github.com/krashish8/Sublime-Snippets/blob/a6a487638e8dd34ea02c9d934fb763343622fef5/cpp-linux.sublime-build#L38-L52))
+
   ```json
   {
       "variants":
