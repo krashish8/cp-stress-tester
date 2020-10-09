@@ -2,6 +2,8 @@
 
 ## Intro
 
+![](preview.gif)
+
 This project contains the files that can be used for Stress Testing the C++ solution, i.e., to find a test case in which the main solution fails.
 
 This tester is divided into three types, for testing three different category of problems:
