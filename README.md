@@ -8,7 +8,7 @@ This project contains the files that can be used for Stress Testing the C++ solu
 
 This tester is divided into three types, for testing three different category of problems:
 * Normal tester: To compare the main solution with a correct brute-force solution.
-* Custom tester: To validate a solution with more than one correct solution.
+* Custom tester: To validate a solution with more than one correct output.
 * Interactive tester: To test the interactive problems.
 
 **Note**:
@@ -87,14 +87,14 @@ The following files are required:
 <details>
 <summary><code>main.cpp</code></summary>
 
-  - The main solution file to test.
+  - The main solution which the user wants to validate.
 
 </details>
 
 <details>
 <summary><code>main__Good.cpp</code></summary>
 
-  - The correct, brute force solution.
+  - The correct, brute force solution, for comparing the final output.
 
 </details>
 
@@ -102,7 +102,7 @@ The following files are required:
 <summary><code>main__Generator.cpp</code></summary>
 
   - The file to generate random test cases.
-  - It should output the test case to the standard output stream (`stdout`) using `cout`.
+  - Output the test case to the standard output stream (`stdout`) using `cout`.
 
 </details>
 
@@ -114,20 +114,19 @@ The following files are required:
 <details>
 <summary><code>main.cpp</code></summary>
 
-  - The main solution file to test.
+  - The main solution which the user wants to validate.
 
 </details>
 
 <details>
 <summary><code>main__Checker.cpp</code></summary>
 
-  - The file to test the solution, which has more than one correct solution.
-  - First, it should take two types of input from the standard input stream (`stdin`) using `cin` in the following order:
+  - The checker to validate a solution with more than one correct output.
+  - Take input from the standard input stream (`stdin`) using `cin` in the following order:
     1. The first input is the testcase produced by the generator: `main__Generator.cpp`.
     2. The second input is the answer produced by the main solution file: `main.cpp`.
-  - It should give verdict to the standard error stream (`stderr`) using `cerr`. First, it should output an `endl` (for better readability), and then give the verdict such as `Expected [...] found [...]` to `cerr`.
-  - Finally, it should `return 0` in case of SUCCESS, or `return 1` in case of FAILURE.
-  - Note: Every response to the user is given using `cerr`.
+  - Give verdict, such as `Expected [...] found [...]` to the standard error stream (`stderr`) using `cerr`.
+  - Finally, `return 0` in case of SUCCESS, or `return 1` in case of FAILURE.
 
 </details>
 
@@ -135,7 +134,7 @@ The following files are required:
 <summary><code>main__Generator.cpp</code></summary>
 
   - The file to generate random test cases.
-  - It should output the test case to the standard output stream (`stdout`) using `cout`.
+  - Output the test case to the standard output stream using `cout`.
 
 </details>
 
@@ -147,31 +146,32 @@ The following files are required:
 <details>
 <summary><code>main.cpp</code></summary>
 
-  - The main solution file to test.
+  - The main solution which the user wants to validate.
 
 </details>
 
 <details>
 <summary><code>main__Generator.cpp</code></summary>
 
-  - This file acts as a generator and an interactor (to generate random test case and to interact with the main solution).
-  - It should first generate a random test case - e.g. the number to guess.
-  - Then rest of the code is written inside an infinite while loop
-  - It should first take the output produced by the main solution from the standard input stream (`stdin`) using `cin`.
-  - It should then output the response to the standard output stream (`stdout`) using `cout`.
-  - For printing any verdict or the testcase (if an error occurred), it should output the response to the standard error stream (`stderr`) using `cerr`.
-  - Note: To interact with the user, output is given using `cout` and other outputs related to verdicts are given using `cerr`.
-  - So, along with `cout`, write the same output to `cerr` for debugging purposes.
-  - After every interaction, it should validate:
-    1. Checking whether the number of questions asked is within limits.
-    2. Checking whether the response of the user is correct or not.
-  - In case of any error, it should output it using `cerr` and simultaneously `return 1`.
-  - In case the answer is correct, it gives appropriate verdict using `cerr` and returns 0.
-  - Also, for debugging purposes, print the correct output using `cerr` at the end of this file, before returning 0 or 1.
+  - This file acts as a generator as well as an interactor (to generate random test case and to interact with the main solution).
+  - Use `cin` and `cout` for interaction (`cin` - take user's query, `cout` - give back response). For printing anything to console or for giving verdict, use `cerr`.
+  - First, generate a random test case - e.g. the number to guess, and store it in some container.
+  - Then loop until the number of queries exceed the allowed query, or the user guesses the correct answer.
+  - Now, inside the loop, first take the output produced by the main solution from the standard input stream using `cin`.
+  - Then, give back the response to the standard output stream using `cout`.
+  - After every interaction, check:
+    1. Whether the number of questions asked is within limits.
+    2. Whether the response of the user is correct or not.
+  - In case of any error, output it using `cerr` and simultaneously `return 1`.
+  - In case the answer is correct, give appropriate verdict using `cerr` and `return 0`.
+
+For debugging purposes,
+  - Output every user's query to the standard error stream using `cerr`, (i.e., for every `cin`, also output the values to `cerr`).
+  - Print the correct answer at the end using `cerr` before returning 0 or 1.
 
 </details>
 
-For an interactor, make sure to flush the output by using `endl`, and not `\n`.
+In case of interactor, make sure to flush the output by using `endl`, and not `\n`.
 
 
 ## Files
