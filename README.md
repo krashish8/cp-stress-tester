@@ -14,7 +14,7 @@ This tester is divided into three types, for testing three different category of
   ```bash
   sudo cp stress-test.sh /usr/bin/
   ```
-* To directly run the stress-tester from an IDE (e.g. Sublime Text), add the command to execute this script to the build file of the IDE. For Sublime Text, the following lines can be added to the build file:
+* To directly run the stress-tester from an IDE (e.g. Sublime Text), add the command to execute this script to the build file of the IDE. For Sublime Text, the following lines shall be added to the build file:
   ```json
   {
       "variants":
@@ -69,7 +69,7 @@ Make sure that the file `stress.sh` is executable. If it isn't, then run `sudo c
 
 ## Description
 
-**NB:** The description is messed up, feel free to contribute and improve it :)
+*The description is messed up, feel free to contribute and improve it :)*
 
 For all the below examples, the main solution has the filename: `main.cpp`.
 The extra files required for testing are named as `'main file' + '__' + '[type].cpp'`, as described below. Note that __ denotes **two** underscores.  
